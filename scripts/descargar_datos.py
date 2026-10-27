@@ -6,7 +6,7 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
-URL = "https://github.com/DataScienceUB/postgrauDSAI/releases/download/datos-2026/bicibcn.zip"
+URL = "https://github.com/DataScienceUB/mp1-plantilla/releases/download/Datos2026_0.1/bicibcn.zip"
 DESTINO = Path(__file__).resolve().parent.parent / "data" / "raw"
 
 if any(DESTINO.glob("*.csv")):
