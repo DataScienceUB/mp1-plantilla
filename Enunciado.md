@@ -84,5 +84,6 @@ Todo lo que necesitáis está en este repositorio.
 **Repositorio plantilla** (`mp1-plantilla`): `AGENTS.md` completo; `SPECS.md`, `DESIGN.md`, `ARCHITECTURE.md` y `TASKS.md` con sus secciones vacías e indicaciones; los tests del contrato mínimo (CD1–CD5); el script de trazabilidad; la integración continua de GitHub y un notebook de exploración con pandas. Los datos se descargan con `uv run python scripts/descargar_datos.py`.
 
 Más adelante podéis basaros en los skills de https://github.com/MireiaUB/Infovis2627/tree/main/skills como inspiración para reglas de diseño.
+Si quieres usar mapas puedes pedir una API Key de CARTO en https://carto.com/basemaps/apikey/  La respuesta es immediata
 
 **Fuentes de los datos reales:** ubicación, altitud y capacidad de las estaciones del feed GBFS de Bicing (consultado el 1 de octubre de 2026); barrios y distritos de CartoBCN (Ajuntament de Barcelona, CC-BY); población por distrito de 2021 ([Wikipedia](https://en.wikipedia.org/wiki/Districts_of_Barcelona)).
