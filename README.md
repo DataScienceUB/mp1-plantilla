@@ -19,20 +19,27 @@ El código lo genera un agente de IA a partir de lo que escribe el equipo. Vuest
 | `TASKS.md` | Lista de tareas en pasos pequeños | El agente propone, el equipo aprueba |
 | `README.md` | Este fichero, para personas | Equipo |
 
-El ciclo de cada iteración:
-
-1. Escribid o ampliad `SPECS.md` y `DESIGN.md`.
-2. Pedid al agente que **revise** la spec y señale ambigüedades. Corregid.
-3. Escribid los tests de aceptación en `tests/acceptance/`, marcados con `@pytest.mark.criterio("CA…")`.
-4. Pedid al agente que proponga las tareas en `TASKS.md`. Aprobadlas.
-5. El agente implementa **una** tarea. Vosotros verificáis y completáis `Verificado por:`.
-6. Si algo cambia, se cambia primero `SPECS.md` (sección "Decisiones") y después el código.
 
 ## Puesta en marcha
 
 ```bash
 uv sync
 uv run python scripts/descargar_datos.py    # datos a data/raw/
+```
+
+
+### El ciclo de cada iteración:
+
+1. Escribid o ampliad `SPECS.md` y `DESIGN.md`.
+2. Pedid al agente que **revise** la spec y señale ambigüedades. Corregid.
+3. Pedid al agente que genere los tests de aceptación en `tests/acceptance/`, marcados con `@pytest.mark.criterio("CA…")`.
+4. Pedid al agente que proponga las tareas en `TASKS.md`. Aprobadlas.
+5. El agente implementa **una** tarea. Vosotros verificáis y completáis `Verificado por:`.
+6. Si algo cambia, se cambia primero `SPECS.md` (sección "Decisiones") y después el código.
+
+### Una vez que el pipeline y `SPECS.md` existan, podéis ejecutar todo el proyecto con: 
+
+```bash 
 uv run python -m src.pipeline               # cuando exista: datos limpios a data/processed/
 uv run pytest                               # tests
 uv run python scripts/trazabilidad.py       # ¿cada criterio tiene su test?
@@ -50,7 +57,7 @@ Cada *push* ejecuta todo lo anterior en GitHub (pestaña **Actions**).
 ## Resumen para la dirección de operaciones
 
 <!--
-Una página, para Jordi Puig. Sin jerga técnica y con cifras.
+Una página, para Aina Puig. Sin jerga técnica y con cifras.
 
 **La situación.** Una o dos frases con lo esencial.
 

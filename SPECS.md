@@ -7,7 +7,7 @@
 
 <!--
 Una o dos frases: para quién es el cuadro de mando y qué decisiones le ayuda a tomar.
-Pista: no es "ver datos", es decidir algo concreto. ¿Qué decidirá Jordi Puig cada lunes?
+Pista: no es "ver datos", es decidir algo concreto. ¿Qué decidirá Aina Puig cada lunes?
 -->
 
 ## 2. Usuarios y preguntas
@@ -40,6 +40,7 @@ Qué genera el pipeline en data/processed/ y qué muestra la app.
 Como mínimo, las tres tablas del contrato de AGENTS.md §3. Añadid las columnas derivadas
 o tablas extra que necesitéis para las métricas (p. ej. fecha, hora, laborable…).
 -->
+- `data/processed/estaciones.parquet`, `viajes.parquet` y `estado.parquet` con el contrato de `AGENTS.md`
 
 ## 5. Requisitos
 
@@ -53,6 +54,18 @@ Ejemplos de forma:
 -->
 
 **Datos**
+
+- R1. Un viaje es válido si sus estaciones de origen y destino existen en el catálogo, la bici se devolvió, aparece una sola vez y dura entre 1 y 180 minutos.
+- R2. `tipo_bici` solo toma los valores `electrica` y `mecanica`.
+- R3. Los viajes afectados por los cambios de hora se corrigen (+60 min el 26-oct-2025, −60 min el 29-mar-2026), no se eliminan.
+- R4. Las estaciones con latitud y longitud intercambiadas se corrigen.
+- R5. Una altitud de −999 significa "desconocida" y se guarda como nula.
+- R6. El distrito de cada estación se toma de su barrio, no del código de distrito del feed.
+- R7. Una estación con capacidad 0 o 1 está fuera de servicio.
+- R8. Las lecturas de estado de estaciones cerradas no se usan.
+- R9. Las lecturas con más bicis y anclajes que capacidad no se usan.
+- R10. Una estación que repite exactamente la misma lectura más de 24 horas seguidas tiene el sensor bloqueado; esas lecturas no se usan.
+- R11. En abonados, el año 1900 significa "desconocido" (nulo) y un género vacío es `no_indicado`.
 
 **Métricas**
 
@@ -72,6 +85,20 @@ Dos tipos útiles:
 
 Lo que no se pueda testear (p. ej. si un gráfico se entiende) indicad cómo se verifica.
 -->
+
+**Datos** (`tests/acceptance/test_datos.py`, además de CD1–CD5)
+
+- CA1 (R1). Ningún viaje dura más de 180 minutos.
+- CA2 (R1). Tras limpiar quedan entre 750.000 y 760.000 viajes.
+- CA3 (R3). La noche del 26-oct-2025 (de 1:00 a 3:00) se conservan al menos 30 viajes y todos duran entre 1 y 60 minutos.
+- CA4 (R4). Todas las estaciones tienen latitud entre 41,30 y 41,50 y longitud entre 2,05 y 2,25.
+- CA5 (R5). Ninguna altitud es negativa y exactamente 3 son nulas.
+- CA6 (R6). La estación 13 está en Sant Martí y la 395 en Ciutat Vella.
+- CA7 (R7). Las estaciones 245, 366 y 458 están fuera de servicio.
+- CA8 (R8). No hay lecturas de la estación 509 entre el 20 de abril y el 31 de mayo de 2026 (cerrada por obras).
+- CA9 (R10). No hay lecturas de la estación 120 del 3 al 9 de mayo de 2026.
+- CA10 (R11). Ningún abonado tiene año 1900 ni género vacío.
+
 
 ## 7. Fuera de alcance
 
