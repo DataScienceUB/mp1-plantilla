@@ -64,7 +64,7 @@ Esto no se negocia. Todo lo demás lo decide el equipo en `SPECS.md`, `DESIGN.md
 
 ## 5. Lo que nunca haces
 
-- **Nunca modificas** `tests/acceptance/`, `SPECS.md` ni `DESIGN.md`. Si crees que están mal o que se contradicen, explícalo y para: lo decide el equipo.
+- **Nunca modificas** `SPECS.md` ni `DESIGN.md`. Si crees que están mal o que se contradicen, explícalo y para: lo decide el equipo.
 - **Nunca cambias un test para que pase.** Si un test falla, el problema está en el código, salvo que el equipo diga otra cosa.
 - **Nunca inventas columnas, valores ni datos.** El esquema de entrada está en `SPECS.md` y en los propios CSV de `data/raw/`.
 - **Nunca modificas `data/raw/`.** Es de solo lectura.
